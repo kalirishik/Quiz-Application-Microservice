@@ -4,6 +4,18 @@ A **Quiz Application** built using **Spring Boot Microservices**, designed with 
 The system is split into **independent microservices**, enabling scalability, modularity, and service discovery.
 
 ---
+## 📖 Project Description
+
+This project is a **Microservices-based Quiz Application** built using **Spring Boot** and **Spring Cloud**.  
+It provides a scalable and modular solution for managing quiz questions, generating quizzes, and evaluating user responses.  
+The system is designed with **Eureka Service Discovery** and an **API Gateway** for seamless communication between services.  
+Each service is independently deployable, ensuring flexibility and easy maintenance.  
+
+The project follows a **layered architecture** (Controller → Service → Repository) and integrates with a **MySQL database** for persistence.  
+APIs are documented using **Swagger UI**, and services communicate using **Feign Clients**.  
+The application supports **dynamic quiz generation, instant scoring, and pagination for large datasets**, making it suitable for both learning and assessment platforms.
+ 
+---
 
 ## 🚀 Features
 - 📌 **Service Discovery** – Eureka Server for service registration and discovery.  
