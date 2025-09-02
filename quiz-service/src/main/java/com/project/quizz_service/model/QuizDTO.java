@@ -1,0 +1,10 @@
+package com.project.quizz_service.model;
+
+import lombok.Data;
+
+@Data
+public class QuizDTO {
+    String categoryName;
+    Integer numOfQuestions;
+    String title;
+}
