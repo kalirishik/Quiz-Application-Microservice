@@ -7,14 +7,14 @@ The system is split into **independent microservices**, enabling scalability, mo
 
 ## 🚀 Features
 - 📌 **Service Discovery** – Eureka Server for service registration and discovery.  
-- 📌 **Question Service** – Manages question CRUD operations with pagination and filters.  
-- 📌 **Quiz Service** – Handles quiz creation, assignment, and scoring.  
+- 📌 **Question Service** – Add, update, delete, and fetch quiz questions with pagination and filters.  
+- 📌 **Quiz Service** – Generate quizzes dynamically based on category & difficulty, manage assignments, and scoring.  
+- 📌 **Answer Submission** – Submit responses and calculate scores instantly.  
 - 📌 **Feign Client Integration** – Quiz Service communicates with Question Service via Feign.  
 - 📌 **Pagination Support** – Retrieve questions efficiently using pageable endpoints.  
 - 📌 **Database Integration** – MySQL with `data.sql` preloaded questions.  
 - 📌 **Swagger UI** – API documentation for all services.  
-- 📌 **Layered Architecture** – Controller → Service → Repository.  
-
+- 📌 **Layered Architecture** – Follows Controller → Service → Repository design pattern.  
 ---
 
 ## 🛠️ Tech Stack
