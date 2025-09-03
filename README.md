@@ -26,7 +26,7 @@ The project follows a layered architecture (Controller → Service → Repositor
 - 📌 **Service Discovery** – Eureka Server for service registration and discovery.
 - 📌 **API Gateway** – Central entry point for routing all client requests.
 - 📌 **Question Service** – Add, update, delete, and fetch quiz questions with pagination and filters.  
-- 📌 **Quiz Service** – Generate quizzes dynamically based on category & difficulty, manage assignments, and scoring.  
+- 📌 **Quiz Service** – Generate quizzes dynamically, manage assignments, and scoring.
 - 📌 **Answer Submission** – Submit responses and calculate scores instantly.  
 - 📌 **Feign Client Integration** – Quiz Service communicates with Question Service via Feign.  
 - 📌 **Pagination Support** – Retrieve questions efficiently using pageable endpoints.  
