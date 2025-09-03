@@ -1,24 +1,30 @@
 # 🎯 Quiz Application - Microservices with Eureka & Feign
 
 A **Quiz Application** built using **Spring Boot Microservices**, designed with **Eureka Server, Eureka Discovery Client, Feign Client, Spring Data JPA, Hibernate, and MySQL**.  
-The system is split into **independent microservices**, enabling scalability, modularity, and service discovery.
+The system is split into independent microservices with centralized routing via API Gateway, enabling scalability, modularity, and seamless service communication.
 
 ---
 ## 📖 Project Description
 
-This project is a **Microservices-based Quiz Application** built using **Spring Boot** and **Spring Cloud**.  
-It provides a scalable and modular solution for managing quiz questions, generating quizzes, and evaluating user responses.  
-The system is designed with **Eureka Service Discovery** and an **API Gateway** for seamless communication between services.  
-Each service is independently deployable, ensuring flexibility and easy maintenance.  
+This project is a Microservices-based Quiz Application built using Spring Boot and Spring Cloud.
+It provides a scalable and modular solution for managing quiz questions, generating quizzes, and evaluating user responses.
 
-The project follows a **layered architecture** (Controller → Service → Repository) and integrates with a **MySQL database** for persistence.  
-APIs are documented using **Swagger UI**, and services communicate using **Feign Clients**.  
-The application supports **dynamic quiz generation, instant scoring, and pagination for large datasets**, making it suitable for both learning and assessment platforms.
- 
+The system includes:
+
+ - Eureka Server for service discovery.
+
+ - API Gateway for centralized routing, load balancing, and filtering.
+
+- Feign Client for internal service-to-service communication.
+
+Each service is independently deployable, ensuring flexibility, scalability, and easier maintenance.
+The project follows a layered architecture (Controller → Service → Repository) and integrates with a MySQL database for persistence.
+
 ---
 
 ## 🚀 Features
-- 📌 **Service Discovery** – Eureka Server for service registration and discovery.  
+- 📌 **Service Discovery** – Eureka Server for service registration and discovery.
+- 📌 **API Gateway** – Central entry point for routing all client requests.
 - 📌 **Question Service** – Add, update, delete, and fetch quiz questions with pagination and filters.  
 - 📌 **Quiz Service** – Generate quizzes dynamically based on category & difficulty, manage assignments, and scoring.  
 - 📌 **Answer Submission** – Submit responses and calculate scores instantly.  
@@ -31,7 +37,8 @@ The application supports **dynamic quiz generation, instant scoring, and paginat
 
 ## 🛠️ Tech Stack
 - **Backend Framework:** Spring Boot (Microservices + REST APIs)  
-- **Service Registry:** Eureka Server  
+- **Service Registry:** Eureka Server
+- **API Gateway:** Spring Cloud Gateway
 - **Communication:** Feign Client (Declarative REST Client)  
 - **Database:** MySQL + JPA/Hibernate  
 - **Utilities:** Lombok  
@@ -42,30 +49,36 @@ The application supports **dynamic quiz generation, instant scoring, and paginat
 ## 📂 Microservice Architecture
 ```
 quiz-microservices/
-├─ eureka-server/ # Service registry
-│ └─ EurekaServerApplication.java
+├─ eureka-server/         # Service registry
+│   └─ EurekaServerApplication.java
 │
-├─ question-service/ # Manages questions
-│ ├─ controller/QuestionController.java
-│ ├─ service/QuestionService.java
-│ ├─ repository/QuestionRepository.java
-│ └─ model/Question.java
+├─ api-gateway/           # Central API Gateway for routing
+│   └─ ApiGatewayApplication.java
 │
-├─ quiz-service/ # Manages quizzes & scoring
-│ ├─ controller/QuizController.java
-│ ├─ service/QuizService.java
-│ ├─ feign/QuestionClient.java # Feign client to call Question Service
-│ └─ model/{Quiz, QuestionWrapper, Response}.java
+├─ question-service/      # Manages questions
+│   ├─ controller/QuestionController.java
+│   ├─ service/QuestionService.java
+│   ├─ repository/QuestionRepository.java
+│   └─ model/Question.java
+│
+├─ quiz-service/          # Manages quizzes & scoring
+│   ├─ controller/QuizController.java
+│   ├─ service/QuizService.java
+│   ├─ feign/QuestionClient.java  # Feign client to call Question Service
+│   └─ model/{Quiz, QuestionWrapper, Response}.java
 │
 └─ pom.xml
-
 ```
 
 ---
 
 ## 🔌 API Overview
+### **🌐 API Gateway Endpoints**
 
-### **Question Service APIs** (`/question-service/question`)
+- `http://localhost:8082/question/** → Question Service`
+- `http://localhost:8082/quiz/** → Quiz Service`
+
+### **📘Question Service APIs** (`/question-service/question`)
 - `GET /allquestions` – list all (no pagination)  
 - `GET /viewQuestions?page={p}&size={s}` – paginated list  
 - `GET /category/{category}` – by category  
@@ -79,7 +92,7 @@ quiz-microservices/
 
 ---
 
-### **Quiz Service APIs** (`/quiz-service/quiz`)
+### **📘 Quiz Service APIs** (`/quiz-service/quiz`)
 - `POST /createQuiz?category={c}&numQ={n}&title={t}` – create quiz (calls Question Service via Feign)  
 - `GET /getQuizQuestionsById/{id}` – get quiz questions (wrapped, no answers)  
 - `POST /submitQuiz/{id}` – submit answers → score  
@@ -89,7 +102,8 @@ quiz-microservices/
 ---
 
 ## 🧩 Implementation Notes
-- **Eureka Server**: Runs on port `8761` (service registry dashboard).  
+- **Eureka Server**: Runs on port `8761` (service registry dashboard).
+- **API Gateway:** Runs on port 8082 (routes all requests).
 - **Question Service**: Registers with Eureka as `QUESTION-SERVICE`.  
 - **Quiz Service**: Registers with Eureka as `QUIZ-SERVICE`. Uses Feign to fetch questions.  
 - **Feign Client**: `@FeignClient(name="QUESTION-SERVICE")` connects services seamlessly.  
@@ -107,9 +121,10 @@ quiz-microservices/
 ### Steps
 1. Start **Eureka Server** (`eureka-server`).  
 2. Run **Question Service** (`question-service`).  
-3. Run **Quiz Service** (`quiz-service`).  
-4. Access **Eureka Dashboard** → `http://localhost:8761`.  
-5. Use **Swagger UI** for APIs:  
+3. Run **Quiz Service** (`quiz-service`).
+4. Start **API Gateway** (`api-gateway`).
+5. Access **Eureka Dashboard** → `http://localhost:8761`.  
+6. Use **Swagger UI** for APIs:  
    - Question Service → `http://localhost:8081/swagger-ui.html`  
    - Quiz Service → `http://localhost:8082/swagger-ui.html`  
 
