@@ -125,4 +125,6 @@ quiz-microservices/
 
 <img width="1838" height="1015" alt="Screenshot 2025-09-03 000636" src="https://github.com/user-attachments/assets/cd4170f5-d485-40f1-b23d-dbc20b4ef30b" />
 
+<img width="1439" height="270" alt="image" src="https://github.com/user-attachments/assets/7038d998-f577-47bf-8182-aa5ac709c752" />
+
 ---
