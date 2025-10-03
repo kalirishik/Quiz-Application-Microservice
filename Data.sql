@@ -1,3 +1,6 @@
+create database questiondb;
+create database quizdb;
+use questiondb;
 CREATE TABLE Question (
     id SERIAL PRIMARY KEY,
     question_title TEXT NOT NULL,
@@ -9,10 +12,6 @@ CREATE TABLE Question (
     difficulty_level TEXT NOT NULL,
     category TEXT NOT NULL
 );
-
-create database questiondb;
-create database quizdb;
-use questiondb;
 show tables;
 desc question;
 select * from question;
